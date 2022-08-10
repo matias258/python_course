@@ -1,0 +1,270 @@
+GUI: Interfaz grafica de usuario --> aplicacion q nos muestra visualmente una interfaz con programas extra
+
+para python tenemos: 
+PyGTK 
+
+PyQt     --> interfaces de usuario
+
+WxPython
+
+Tkinter --> Librerias de usuario
+hay herramientas para crear interfaces de usuario a mano (tkinter designer)
+
+
+ADENTRANDONOS EN TKINTER-----------------------------------------------------------------------------------------------------------------------------------
+
+Tcl/Tk --> Tcl es un lenguaje de programacion (se lo conoce como bindings), y Tk es un toolkit para crear interfaces de usuario
+
+Tkinter interpreta el Tcl (cuando lo llamamos con "import tkinter")
+-----------------------------------------------------------------------------------------------------------------------------------
+import ktinter --> importa tkinter
+
+window = tkinter.Tk()  --> crea una ventana, pero todavia nos falta un loop para que mantenga la ventana abierta
+
+window.mainloop() --> crea el loop (con esto generamos la ventanita)
+
+EL RESTO DE COSAS VAN A IR ANTES DEL MAINLOOP  Y DESPUES de window= tkinter.Tk():
+
+LABEL----------------------------------------------------------------------------------------------------------------------------
+
+label = tkinter.Label(window,text = "hola", bg = "yellow", fg="blue")   --> crea un widget label, que va a la ventana window
+label.pack(ipadx=50, ipady=50)                                                                --> esto hace que se muestre el label
+
+bg --> background
+fg --> color del texto
+ipadx -->  horizontal 
+ipady -->  vertical
+
+ej:
+import tkinter
+window = tkinter.Tk()
+
+label:saludo = tkinter.Label(window, text= "hola", bg = "yellow", fg= "blue")
+label.pack(ipadx=50, ipady=50)    
+
+label_adios= tkinter.Label(window, text= "adios", bg = "red", fg= "white")
+label.pack(ipadx=50, ipady=50)    
+
+--> Si lo corremos vemos que la etiqueta (label) no permanece en toda la ventana cuando la agrando o la achico. Para eso usamos fill:
+
+FILL--------------------------------------------------------------------------------------------------------------------------
+
+fill --> rellena los costados horizontales o verticales
+
+label.pack(ipadx=50, ipady=50, fill="x")   
+
+fill "x" es un relleno horizontal
+fill="y" es un relleno vertical
+fill= "both" rellena las dos
+
+EXPAND--------------------------------------------------------------------------------------------------------------------------
+
+Podemos tambien hacer que se expanda: usaremos EXPAND
+
+label.pack(ipadx=50, ipady=50, fill="x", expand = True) --> lo que hace es centrarse cuando agrandas o achicas la ventana
+
+
+SIDE --------------------------------------------------------------------------------------------------------------------------
+Posicionamento de los labels
+
+label.pack(ipadx=50, ipady=50, fill="x", side = "left")   --> lo coloca a la izquierda
+                                                                               side = "right"  --> lo coloca a la derecha
+
+
+EJEMPLO:
+
+label1 = tkinter.Label(window, text="label1", bg="yellow", fg="blue")
+label1.pack(ipadx=45, ipady=15, fill ="x")
+
+label2 = tkinter.Label(window, text="label1", bg="purple", fg="white")
+label2.pack(ipadx=45, ipady=15, fill ="x")
+
+label3 = tkinter.Label(window, text="label1", bg="blue", fg="white")
+label3.pack(ipadx=45, ipady=15, fill ="x")
+
+label4 = tkinter.Label(window, text="label1", bg="green", fg="white")
+label4.pack(ipadx=15, ipady=15, side = "left")
+
+label5 = tkinter.Label(window, text="label1", bg="red", fg="white")
+label5.pack(ipadx=15, ipady=15, side = "left")
+
+label6 = tkinter.Label(window, text="label1", bg="orange", fg="white")
+label6.pack(ipadx=15, ipady=15, side = "right"")
+
+
+GRID--------------------------------------------------------------------------------------------------------------------------
+
+from tkinter import ttk  --> para q lo q hagamos tenga cierta estilo 
+
+window.columnconfigure(0, weight = 1)  --> crea grid
+window.columnconfigure(1, weight=3)
+
+weight --> cuantos elementos le puedo meter a mi columna
+
+EJEMPLO: hagamos un usuario y contraseña:
+
+window.columnconfigure(0, weight = 1)  
+window.columnconfigure(1, weight=3)
+
+username_label = ttk.Label(window, text="username:")    --> usamos ttk porque es mas consistente para hacer Labels pero en teoria es lo mismo
+username_label.grid(column=0, row = 0, sticky=tkinter.W, padx = 5, pady = 5)                                --> donde lo posiciono
+
+
+STICKY --> cuando cambie la ventanita no se me vaya la label de un lado para otro
+.W --> usamos sticky.W porque lo queremos en el Oeste (existen .E, .N, .S)
+PADY   --> lo que dejamos de margenes en el horizontal
+PADX  --> lo que dejamos de margenes en el vertical
+
+INPUT BOX--------------------------------------------------------------------------------------------------------------------------
+
+Le agregamos una box al ejemplo ya q estamos
+
+username_entry = ttk.Entry(window)
+username_entry.grid(column=1, row=0, sticky=tkinter.E, padx=5, pady=5)  --> nos crea un input a la derecha de donde pedimos el username
+
+-------------------------------------------------------------------------------------------------------------------------------------
+Creemos un password justo abajo del username
+
+
+password_label = ttk.Label(window, text="Password:")   
+password_label.grid(column=0, row = 1, sticky=tkinter.W, padx = 5, pady = 5)   
+
+password_entry = ttk.Entry(window)
+password_entry.grid(column=1, row=1, sticky=tkinter.E, padx=5, pady=5)
+
+
+Cambiamos el row( fila) a 1 para que me quede justo 1 abajo del username
+
+Pero no queremos que se vea la contraseña, para eso usamos SHOW:
+
+password_entry = ttk.Entry(window, show = "*") --> ahora cuando escribis te pone asteriscos
+
+BUTTON-------------------------------------------------------------------------------------------------------------------------------------
+
+Le creamos un boton
+
+login:button = ttk.Button(window, text ="Login")
+login_button.grid(column = 1, row = 3, sticky=tkinter.E, padx = 5, pady = 5)
+
+
+para guarnos hagamos un esquema de todo lo que hicimos:
+
+(0,0)  (1,0)  (2,0)
+(0,1)  (1,1)  (2,1)
+(0,2)  (1,2)  (2,2) --> esta es la grid quehabiamos hecho
+
+Label  Entry  (2,0)
+Label  Entry (2,1)
+(0,2)  (1,2)    Button   --> y asi nos esta quedando
+
+POSICIONAMIENTO ABSOLUTO-------------------------------------------------------------------------------------------------------------------------------------
+
+Otra forma de posicionar labels es usando coordenadas de pixeles dentro de la ventana
+
+label1 = tkinter.Label(window, text="hola", bg="blue", fg="white")
+label1.place(x = 10, y = 50)
+
+Esta manera no se puede usar con ttk, pero es mas rompebolas
+
+SYSEXIT-------------------------------------------------------------------------------------------------------------------------------------
+
+sys.exit(0) --> se usa para terminar una ejecucion de la ventana
+
+FRAMES-----------------------------------------------------------------------------------------------------------------------------------
+
+FRAME: Es un contenedor donde podremos crear mas widgets (labels, buttons, etc)
+
+frame = ttk.Frame(window)
+
+label = ttk.Label(frame, text ="hola")
+label.grid(column = 0, row = 0, sticky = tkinter.W, padx = 50, pady= 50)
+
+frame.grid(column=0, row=0, sticky= tkinter.W)
+
+
+LIST BOX-----------------------------------------------------------------------------------------------------------------------------------
+
+LIST BOX: una lista de seleccion, nos permite dentro de una serie de elementos seleccionar uno multiple
+
+lista = ["Windows", macOS", Linux"]
+lista_items = tkinter.StringVar(value = lista)  --> lo importamos para q funciones en tkinter
+
+listbox = tkinter.Listbox(window, height= 100, listvariable = lista_items)
+listbox.grid(column = 0, row = 0, sticky = tkinter.W)
+
+
+RADIO BUTTON-----------------------------------------------------------------------------------------------------------------------------------
+
+Es para hacer los multiple choice y cosas asi 
+
+selected = tkinter.StringVar()
+
+r1 = ttk.Radiobutton(window, text = "Si", value= "1", variable = selected) -->variable = selected, es donde voy a guardar el valor seleccionado
+r1.gird(column = 0, row = 1, pady = 5, padx = 5)
+
+
+selected = tkinter.StringVar()
+
+
+Si por ej, tengo otro radio button, pero con otra variable. Si marco uno d los botones y luego el otro, no se va a cambiar a seleccionado sino que se van a marcar los 2.
+
+r1 = ttk.Radiobutton(window, text = "Si", value= "1", variable = selecteded2)
+r1.gird(column = 0, row = 2 pady = 5, padx = 5)
+
+
+CHECK-----------------------------------------------------------------------------------------------------------------------------------
+
+Muy similar al Radio button, pero en ves de seleccionar lo chequeas con un tick (V)
+
+checkbox = ttk.Checkbutton(window, text="Acepto las condiciones", variable = selected)
+checkbox.grid(row = 0, column = 0)
+
+EVENTOS-----------------------------------------------------------------------------------------------------------------------------------
+
+Lo usamos para crear alguna accion sobre otras widgets
+
+boton = tkinter.Button(window, text = "Haz click")
+boton.pack()
+
+#ahora unimos un evento a una accion
+
+boton.bind("<Button-1>", saludar)
+
+#definimos saludar (esto va al principio)
+
+def saludar (event):
+        print("Han hecho click en saludo")
+
+#Hagamos otro
+
+def saludarDobleClick(event):
+       print("Han hecho doble click")
+
+boton.bind("<Double-1>", saludarDobleClick)   --> <Double-1> se refiere a hacer doble click en el boton
+
+#Creemos uno q nos haga salir
+
+def salir(event):
+        print("dios")
+        window.quit()
+
+botonSalir = tkinter.Button(window, text = "Haz click")
+botonSalir.pack()
+botonSalir.bind("<Button-1>", salir)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
