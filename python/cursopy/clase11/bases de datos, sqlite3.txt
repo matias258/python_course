@@ -1,0 +1,119 @@
+
+BASE DE DATOS: Almacen de datos, son como hojas de calculo (tablas, campos, multiples valores)
+
+Cassandra 
+Influx
+MongoDb
+MySQL
+MariaSQL
+SEQlite
+
+USAREMOS SEQlite------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+vamos al cmd y ponemos:
+
+sqlite3 mifichero.db  --> lo crea
+.quit --> lo cierra
+
+CREO UNA BASE DE DATOS----------------------------------------------------------------------------------
+
+sqlite3 miaplicacion.db --> esto va en el cmd
+
+
+CREO UNA TABLA----------------------------------------------------------------------------------
+
+Una vez creada la tabla, se puede abrir desde Pycharm y operar con el (como con  el CMakeList de Clion). 
+Se puede navegar por la base de datos mas facilmente desde la hoja q creamos en Pycharm
+
+CREATE TABLE users(
+id INTEGER PRIMARY KEY,  --> identificador de usuario, una primary key no puede tener duplicados
+usrname TEXT NOT NULL, --> el campo username obligatoriamente lo tengo q poner (porque esta el NULL)
+password TEXT NOT NULL); 
+
+insert into USERS(id, username, password) VALUES(2, "usuario", "clave")
+SELECT * FROM users; --> nos muestra lo q creamos dentro de la tabla
+.schema users --> nos muestra el CREATE TABLE users
+
+.tables  --> nos muestra la tabla que creamos
+
+si pongo .quit, no me desaparece la tabla xq ya la he creado
+
+TRABAJANDO DESDE LA TABLA QUE CREAMOS----------------------------------------------------------------------------------
+EN PYCHARM DE SQLITE------------------------------------------------------------------------------------------------------------------------------
+
+import sqlite3
+
+conn = sqlite3.connect("miaplicacion.db")   --> abre el fichero
+
+conn.close()  --> cierra el fichero
+
+TODO EL RESTO DEL CODIGO TIENE QUE IR ADENTRO DE ESAS 2 (como en Tkinter)
+
+CURSOR------------------------------------------------------------------------------------------------------------------------------
+
+cursor = conn.cursor()
+
+rows = cursor.execute("SELECT * FROM users")  --> nos va a devolver los datos que tenemos en la tabla
+for row in rows:		--> este ciclo es para que printee todos los datos
+      print(row)
+
+rows = cursor.execute("SELECT * FROM users WHERE username = "vroman" ") --> nos devuelve solo los datos del username (se puede usar con otras)
+
+cursor.close() --> esto va al final (antes de conn.close())
+
+VERIFICACION DE USER Y CONTRA-----------------------------------------------------------------------------------------------------------------------------
+
+import getpass
+
+def main():			
+       username = input("Nombre de usuario: ")
+       password = getpass.getpass("Contraseña: ")
+      if verifica_credenciales():
+          print("Login correcto")
+     else:
+         print("Login incorrecto")
+
+def verifica_credenciales(username, password)
+        conn = sqlite3.connect("miaplicacion.db")
+        cursor = conn.cursor()
+  
+        query= cursor.execute(f"SELECT id FROM users WHERE username ={ username } AND password ={ password}")     --> busca si hay una                                                                                                                                                                coincidencia entre el user y el password en la lista q creamos   
+
+        print("Query a ejecutar: ", query)
+
+       rows = cursor.execute(query)
+       data = rows.fetchone()    	--> nos devuelve un elemento
+        print("data es", type(data))  --> si escribimos mal el user y pass nos da un NoneType, si esta bien nos da una Tuple   
+      
+        cursor.close()
+        conn.close()
+
+         if data == None:     --> Si data nos daba un NoneType es que habiamos puesto mal la contra. 
+                  return False    --> Esto se pone despues del conn.close()
+         return True
+
+CREAR USUARIO-----------------------------------------------------------------------------------------------------------------------------
+
+def main():
+       crear_usuario(4, "pepe", "sueprclave")
+
+def crearusuario(identificador, usuario, clave):
+        conn = sqlite3.connect("miaplicacion.db")
+        cursor = conn.cursor()
+  
+        query= f"INSERT INTO users(id, username, password    ) VALUES({identificador}, "{usuario}", "{clave}")
+        # Nos pide el user, id, y la clave
+
+        print(type(rows))
+
+       rows = cursor.execute(query)
+       
+        con.commit()  			 # envia lo q acabamos de hacer a la lista
+        cursor.close()
+        conn.close()
+
+
+
+
+
+

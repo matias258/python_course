@@ -1,0 +1,9 @@
+DJANGO: Es un framework (conjunto de herramientas que nos permite desarrollar sitios webs rapidamente)
+Django tiene MTV: Model Template View
+
+CREAR PROYECTO DJANGO------------------------------------------------------------------------------------------------------------------------
+
+En cmd:
+
+django-admin startproject miproyecto .     --> el punto es la ruta de instalacion (hay que ponerlo)
+

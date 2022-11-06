@@ -1,0 +1,4 @@
+
+py -m pip install Django		# para instalar por ej Django
+
+py --version 			# me dice la version

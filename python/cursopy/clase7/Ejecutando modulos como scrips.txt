@@ -1,0 +1,17 @@
+MODULOS:  ficheros que terminan en .py (ej suma.py)
+------------------------------------------------------------------------------------------------------------------------
+Importar modulos: escribimos " import loquequeremosimportar" arriba de todo el codigo
+
+y para usarlo bien hay que hacer x ej
+
+res = loquequeremosimportar.funciondentrodemodulo(algo)
+------------------------------------------------------------------------------------------------------------------------
+si escribimos: "import loquequeremosimportar as o"
+
+podemos escribir el ej anterior como
+
+res = o.funciondemodulo(algo)
+------------------------------------------------------------------------------------------------------------------------
+paa importar x link es
+
+sys.path.append("link")

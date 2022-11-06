@@ -1,0 +1,144 @@
+PROGRAMACION MULTI-HILO: Para ejecutar multiples funciones en paralel0
+veamos un ejemplo:
+
+import _thrread
+import time
+
+def horaActual(nombre_thread, tiempo_de_espera):
+        count = 0
+
+        while count < 5:                                                                        #bucle infinito que devuelve el print y la hora y fecha 
+                      time.sleep(tiempo_de_espera)
+                       print(f"hilo: {nombre_thread} - {time.time(time.time())}")
+
+_thread.start_new_thread(horaActual, ("thread_uno", 1))
+_thread.start_new_thread(horaActual, ("thread_dos", 5))
+
+--> hilo: thread_uno - fecha y hora en la q lo printeamos
+--> hilo: thread_dos - fecha y hora en la q lo printeamos
+--> hilo: thread_uno - fecha y hora en la q lo printeamos
+--> hilo: thread_dos - fecha y hora en la q lo printeamos
+etc...
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+FILTER: Aplica una funcion a todos los elementos de una lista, si es True filter guarda ese valor, sino filter pierde ese valor
+
+ej:
+
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+def mifuncion(x):
+        if x % 2 == 0:
+              return True
+   
+       return False
+
+resultado = filter(mifuncion, numeros) # devuelve todos los pares, que es cuando mifuncion es True
+print(list(resultado))
+
+--> [2, 4, 6, 8, 10]
+
+otra forma de escribirlo mas sencilla es:
+
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+resultado = filter(lambda x: x % 2 == 0, numeros)
+print(list(resultado))
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+MAP: En vez de aplicar si la condicion es True, map aplica indiscriminadamente a todos los indices de la lista
+
+def cuadrado(x):
+        return x * x
+
+resultado = map(cuadrado, [1,2,3,4,5,6,7,8,9])
+print(list(resultado))
+
+--> [1, 4, 9, 16, 25, 36, 49, 64, 81]
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+REDUCE: ejecuta de forma recursiva una funcion sobre la lista hasta que la lista se quede con un unico elemento
+
+para usar reduce tenemos que importar --> from functools import reduce
+
+ej:
+
+def suma(a, b):
+        return x + x
+
+reduce(suma, [1,2,3,4,5])
+print(res)
+
+--> 1+2+3+4+5 = 15
+
+otra manera con lambda es:
+
+res = reduce(lambda a,b: a + b, [1,2,3,4,5])
+print(res)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+ZIP: agrega iterables en una tupla y los devuelve
+
+ej:
+
+cursos = ["java", "python", "git"]
+asistentes = [15,20,4]
+demo = zip(cursos, asistentes)
+print(list(demo))
+
+--> [("java", 15), ("python", 20), ("git", 4)] 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+ALL: se usa para verificar q todas las condiciones de la lista se cumplan
+ANY: se usa para verificar que algunas condiciones de la lista se cumplan
+
+ej:
+
+listaA = [1 ==1, 2==2, 3==4]
+res = any(listaA)
+print(res)
+
+--> True		 # xq al menos una de estas listas es cierta
+
+res2 = all(listaA)
+print(res2)
+
+--> False    	 #xq no todas son ciertas
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+ROUND: redondear un float (>= .5 redondea para arriba,  <.5 redondea para abajo)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+MIN: Devuelve el minimo
+
+ej: print(min(1,2,3,4,5)) --> 1
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+SORTED: ordena una lista (aun si es una lista de char)
+
+lista = ["z", "c", "d", "a"]
+ordenada = sorted(lista)
+print(ordenada) -->   ["a", "c", "d", "z"]
+
+y si la quiero al revez:
+
+ordenada = sorted(lista, reverse = True)
+
+y si le quiero poner aun mas condiciones:
+
+ordenada = sorted(lista, reverse = True, key = lambda x: str(x).startswith("a")) 	# la parta del lambda nos permite ponerle mas condiciones
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Convierte un digito a un string
+
+ej:
+secreto = 50
+
+valor = input("Introduce un numero: ")
+valor = int
+
+
+
+
+
+
+
+

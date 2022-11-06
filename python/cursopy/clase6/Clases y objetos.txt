@@ -1,0 +1,90 @@
+Crear clase:
+class algo:
+          codigo
+----------------------------------------------------------------------------------------------------------------------------------------
+METODOS: Funciones dentro de clases
+
+class Dino:
+          encendido = False
+          
+          def enciende(self):
+                  pass
+
+d = Dino()
+
+d.enciende()    --> ahi podemos acceder a enciende que estaba definido dentro de Dino
+
+print(d.encendido)   --> False
+
+----------------------------------------------------------------------------------------------------------------------------------------
+SELF: sirve para sobreescribir un valor dentro de def
+
+ej:
+
+class Dino:
+          encendido = False
+          
+          def enciende(self):
+                  self.encendido = True  --> aca se sobreescribe encendido
+d = Dino()
+d.enciende()    --> ahi podemos acceder a enciende que estaba definido dentro de Dino
+print(d.encendido)   --> True
+----------------------------------------------------------------------------------------------------------------------------------------
+INSTANCIAS
+CLASES DINAMICAS
+
+class Dino = 
+           encendido = True
+     
+           def enciende(self):
+                  self.encendido = True
+
+           def apaga(self):
+                  self.encendido = False
+   
+          def isEncendido(self):
+                 return self.encendido
+d1 = Dino()
+d1.apaga()
+print(d1.isEncendido())  --> False
+ 
+d2 = Dino()
+d2.enciende() 
+print(d2.isEncendido()) --> True
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+CLASES ESTATICAS: Iguales q las dinamicas solo que comparten todo
+
+class Estatica:
+          numero = 1
+          def incrementa():
+                 Estatica.numero+=1
+
+Estatica.incrementa()
+print(Estatica.numero)   --> 1
+
+Estatica.incrementa()
+print(Estatica.numero)  --> 2
+
+Estatica.incrementa()
+print(Estatica.numero)  --> 3
+----------------------------------------------------------------------------------------------------------------------------------------
+HERENCIA: La habilidad de importar partes de un codigo a a otro codigo b
+
+class hola:
+          def enciende(self):
+                  self.encendido = True
+
+           def apaga(self):
+                  self.encendido = False
+   
+          def isEncendido(self):
+                 return self.encendido
+
+class adios(hola):  --> aca heredo todo de hola, todas sus definiciones etc..
+          codigo
+----------------------------------------------------------------------------------------------------------------------------------------
+CONSTRUCTOR: se crea usando def __init__(self):
+No entendi muy bien para que funciona
+
