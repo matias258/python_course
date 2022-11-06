@@ -1,8 +1,0 @@
-
-Python es un lenguaje interpretado xq dependo de otro programa para poder correr mi codigo. Necesitamos algo q interprete el codigo, el propio python.
-igual que en php y muchos otros lenguajes.
-Un interprete es un programa que lee muchos ficheros y los va ejecutando. (en python el interprete es el propio python).
-
-Como puedo instalar un paquete?
-uso el cmd--> pip install scipy (instalo scipy)
-en pypi.org es donde encontramos todos los paquetes
